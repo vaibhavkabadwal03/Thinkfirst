@@ -1,0 +1,17 @@
+package com.neighborly.thinkfirst.feature.dashboard
+
+import androidx.compose.runtime.Composable
+import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+
+@Composable
+fun DashboardRoute(
+    onNavigateToAppSelection: () -> Unit,
+    onPermissionsClick: () -> Unit,
+    viewModel: DashboardViewModel = hiltViewModel(),
+) {
+
+    val state = viewModel.uiState.collectAsStateWithLifecycle()
+
+    DashboardScreen(uiState = state.value, onManageAppsClick = onNavigateToAppSelection)
+}

@@ -1,6 +1,7 @@
 package com.neighborly.thinkfirst.feature.appselection
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 
@@ -8,9 +9,9 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 fun AppSelectionRoute(
     viewModel: AppSelectionViewModel = hiltViewModel()
 ) {
-    val state = viewModel.uiState.collectAsStateWithLifecycle()
+    val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     AppSelectionScreen(
-        uiState = state.value
+        uiState = uiState
     )
 }

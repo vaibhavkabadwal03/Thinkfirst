@@ -2,21 +2,18 @@ package com.neighborly.thinkfirst.data.mapper
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import android.content.pm.PackageManager
 import com.neighborly.thinkfirst.domain.model.InstalledApp
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
-class MyAppMapper @Inject constructor() {
-
-    fun toInstalledApp(
-        packageManager: PackageManager,
-        applicationInfo: ApplicationInfo
-    ): InstalledApp {
-
+class MyAppMapper @Inject constructor(@ApplicationContext private val context: Context) {
+    fun toInstalledApp(applicationInfo: ApplicationInfo): InstalledApp {
+        val packageManager = context.packageManager
 
         return InstalledApp(
             appName = applicationInfo.loadLabel(packageManager).toString(),
-            packageName = applicationInfo.packageName
+            packageName = applicationInfo.packageName,
+            icon = applicationInfo.loadIcon(packageManager)
         )
     }
 }

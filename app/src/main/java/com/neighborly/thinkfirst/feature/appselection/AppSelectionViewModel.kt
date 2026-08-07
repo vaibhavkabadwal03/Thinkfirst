@@ -14,8 +14,7 @@ import javax.inject.Inject
 class AppSelectionViewModel @Inject constructor(
     private val getInstalledApps: GetInstalledAppsUseCase
 ) : ViewModel() {
-    private val _uiState =
-        MutableStateFlow(AppSelectionUiState())
+    private val _uiState = MutableStateFlow(AppSelectionUiState())
 
     val uiState = _uiState.asStateFlow()
 
@@ -26,17 +25,22 @@ class AppSelectionViewModel @Inject constructor(
     private fun loadInstalledApps() {
         viewModelScope.launch {
 
-            _uiState.update {
-                it.copy(isLoading = true)
-            }
+            _uiState.update { it.copy(isLoading = true) }
 
-            val apps = getInstalledApps()
-
-            _uiState.update {
-                it.copy(
-                    isLoading = false,
-                    installedApps = apps
-                )
+            runCatching { getInstalledApps() }.onSuccess { apps ->
+                _uiState.update {
+                    it.copy(
+                        installedApps = apps,
+                        isLoading = false
+                    )
+                }
+            }.onFailure { throwable ->
+                _uiState.update {
+                    it.copy(
+                        isLoading = false,
+                        error = throwable.message
+                    )
+                }
             }
         }
     }

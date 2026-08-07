@@ -6,7 +6,11 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavHostController
 
 @Composable
-fun DashboardRoute(navController: NavHostController, viewModel: DashboardViewModel = hiltViewModel()) {
+fun DashboardRoute(
+    onNavigateToAppSelection: () -> Unit,
+    onPermissionsClick: () -> Unit,
+    viewModel: DashboardViewModel = hiltViewModel(),
+) {
 
     val state = viewModel.uiState.collectAsStateWithLifecycle()
 

@@ -4,6 +4,7 @@ plugins {
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.hilt)
+    alias(libs.plugins.kotlin.serialization)
 }
 
 android {
@@ -52,7 +53,6 @@ dependencies {
     implementation(libs.androidx.compose.ui.graphics)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.material3)
-    implementation(libs.androidx.material3)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -67,8 +67,8 @@ dependencies {
     ksp(libs.room.compiler)
 
     //Lifecycle
-    implementation(libs.lifecycle.livedata)
-    implementation(libs.lifecycle.viewmodel)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    implementation(libs.androidx.lifecycle.viewmodel.ktx)
 
     //Hilt
     implementation(libs.hilt.android)
@@ -77,4 +77,7 @@ dependencies {
 
     //Android nav compose
     implementation(libs.androidx.navigation.compose)
+
+    //Kotlin Serialization
+    implementation(libs.kotlinx.serialization.json)
 }

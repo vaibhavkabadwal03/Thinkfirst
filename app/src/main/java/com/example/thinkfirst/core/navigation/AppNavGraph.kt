@@ -14,8 +14,15 @@ fun AppNavGraph() {
         navController = navController,
         startDestination = AppNavRoute.Dashboard
     ) {
-        composable <AppNavRoute.Dashboard>{
-            DashboardRoute(navController)
+        composable<AppNavRoute.Dashboard> {
+            DashboardRoute(
+                onNavigateToAppSelection = {
+                    navController.navigate(AppNavRoute.AppSelection)
+                },
+                onPermissionsClick = {
+                    navController.navigate(AppNavRoute.Permissions)
+                }
+            )
         }
     }
 }

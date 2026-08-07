@@ -7,7 +7,11 @@ sealed interface AppNavRoute {
 
     @Serializable
     data object Dashboard : AppNavRoute
+    @Serializable
     data object AppSelection : AppNavRoute
+    @Serializable
     data object Permissions : AppNavRoute
+
+    @Serializable
     data object Intervention : AppNavRoute
 }

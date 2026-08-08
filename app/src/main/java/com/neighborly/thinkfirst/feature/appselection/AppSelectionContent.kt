@@ -1,23 +1,16 @@
 package com.neighborly.thinkfirst.feature.appselection
 
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
 
 @Composable
-fun AppSelectionContent(state: AppSelectionUiState){
+fun AppSelectionContent(state: AppSelectionUiState) {
 
-
-    Column(
-        modifier = Modifier.fillMaxSize(),
-        horizontalAlignment = Alignment.CenterHorizontally,
-        verticalArrangement = Arrangement.Center
-    ) {
-        Text("App Selection")
+    LazyColumn {
+        items(state.installedApps) { item ->
+            Text(text = item.appName)
+        }
     }
-
 }

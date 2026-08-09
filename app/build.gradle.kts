@@ -8,13 +8,13 @@ plugins {
 }
 
 android {
-    namespace = "com.example.thinkfirst"
+    namespace = "com.neighborly.thinkfirst"
     compileSdk {
         version = release(36)
     }
 
     defaultConfig {
-        applicationId = "com.example.thinkfirst"
+        applicationId = "com.neighborly.thinkfirst"
         minSdk = 24
         targetSdk = 36
         versionCode = 1

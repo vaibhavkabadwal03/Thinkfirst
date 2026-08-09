@@ -9,7 +9,7 @@ import javax.inject.Inject
 class AppRepositoryImpl @Inject constructor(private val dataSource: PackageManagerDataSource, private val mapper: MyAppMapper) : AppRepository {
     override suspend fun getInstalledApps(): List<InstalledApp> {
         return dataSource
-            .getInstalledApplications()
+            .getLauncherApplications()
             .map(mapper::toInstalledApp)
             .sortedBy {
                 it.appName.lowercase()

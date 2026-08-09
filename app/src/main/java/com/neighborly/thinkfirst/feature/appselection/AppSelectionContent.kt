@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -26,8 +27,9 @@ fun AppSelectionContent(
     onContinueClick: () -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxSize()
-        .background(MaterialTheme.colorScheme.onPrimary)
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colorScheme.onPrimary)
             .padding(bottom = 16.dp)
     ) {
         LazyColumn(modifier = Modifier.weight(1f)) {
@@ -50,7 +52,8 @@ fun AppSelectionContent(
             enabled = state.selectedPackages.isNotEmpty(),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(start = 8.dp, end = 8.dp, top = 16.dp, bottom = 8.dp),
+                .padding(start = 8.dp, end = 8.dp, top = 16.dp, bottom = 8.dp)
+                .height(56.dp),
             shape = RoundedCornerShape(12.dp)
         ) {
             Text(stringResource(R.string.continue_button))

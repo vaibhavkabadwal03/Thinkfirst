@@ -10,6 +10,7 @@ fun AppSelectionRoute(viewModel: AppSelectionViewModel = hiltViewModel()) {
     val uiState by viewModel.uiState.collectAsStateWithLifecycle()
 
     AppSelectionScreen(
-        uiState = uiState
+        uiState = uiState,
+        onAppSelectionChanged = viewModel::onAppSelectionChanged
     )
 }

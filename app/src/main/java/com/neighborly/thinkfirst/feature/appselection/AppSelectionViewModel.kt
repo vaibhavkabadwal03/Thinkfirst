@@ -30,7 +30,7 @@ class AppSelectionViewModel @Inject constructor(
             runCatching { getInstalledApps() }.onSuccess { apps ->
                 _uiState.update {
                     it.copy(
-                        installedApps = apps,
+                        apps = apps,
                         isLoading = false
                     )
                 }
@@ -42,6 +42,26 @@ class AppSelectionViewModel @Inject constructor(
                     )
                 }
             }
+        }
+    }
+
+    fun onAppSelectionChanged(
+        packageName: String,
+        selected: Boolean
+    ) {
+        val updatedSelection =
+            _uiState.value.selectedPackages.toMutableSet()
+
+        if (selected) {
+            updatedSelection.add(packageName)
+        } else {
+            updatedSelection.remove(packageName)
+        }
+
+        _uiState.update {
+            it.copy(
+                selectedPackages = updatedSelection
+            )
         }
     }
 }

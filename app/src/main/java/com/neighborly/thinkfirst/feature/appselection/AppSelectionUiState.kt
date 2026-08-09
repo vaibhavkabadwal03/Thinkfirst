@@ -3,8 +3,8 @@ package com.neighborly.thinkfirst.feature.appselection
 import com.neighborly.thinkfirst.domain.model.InstalledApp
 
 data class AppSelectionUiState(
-
+    val apps: List<InstalledApp> = emptyList(),
+    val selectedPackages: Set<String> = emptySet(),
     val isLoading: Boolean = false,
-    val installedApps: List<InstalledApp> = emptyList(),
     val error: String? = null
 )

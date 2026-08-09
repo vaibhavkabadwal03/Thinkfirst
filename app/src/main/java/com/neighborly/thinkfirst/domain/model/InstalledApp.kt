@@ -7,6 +7,4 @@ data class InstalledApp(
     val appName: String,
     val packageName: String,
     val icon: Drawable?,
-    val isSelected: Boolean = false
-
 )

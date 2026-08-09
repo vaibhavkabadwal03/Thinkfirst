@@ -1,5 +1,6 @@
 package com.neighborly.thinkfirst.feature.dashboard
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -12,7 +13,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import com.neighborly.thinkfirst.R
 
 @Composable
 fun DashboardScreen(
@@ -22,14 +25,15 @@ fun DashboardScreen(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp),
+            .background(MaterialTheme.colorScheme.background),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Text(
-            text = "OneSec Clone",
-            style = MaterialTheme.typography.headlineMedium
+            text = stringResource(R.string.app_name),
+            style = MaterialTheme.typography.headlineMedium,
+            color = MaterialTheme.colorScheme.primary
         )
 
         Spacer(modifier = Modifier.height(24.dp))
@@ -40,19 +44,22 @@ fun DashboardScreen(
                     "ON"
                 else
                     "OFF"
-            }"
+            }",
+            color = MaterialTheme.colorScheme.primary
+
         )
 
         Spacer(modifier = Modifier.height(12.dp))
 
         Text(
-            text = "Restricted Apps: ${uiState.restrictedApps}"
+            text = "Restricted Apps: ${uiState.restrictedApps}",
+            color = MaterialTheme.colorScheme.primary
         )
 
         Spacer(modifier = Modifier.height(40.dp))
 
         Button(
-            onClick = {onManageAppsClick()}
+            onClick = { onManageAppsClick() }
         ) {
             Text("Manage Apps")
         }

@@ -1,4 +1,9 @@
 <resources>
     <string name="app_name">ThinkFirst</string>
     <string name="selected_app_icon">Selected App Icon</string>">
+    <string name="continue_button">Continue</string>
+    <string name="confirm">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="accessibility_permission">Accessibility Permission</string>
+    <string name="accessibility_permission_subtitle">Enable Accessibility permission for a better ThinkFirst experience.</string>
 </resources>

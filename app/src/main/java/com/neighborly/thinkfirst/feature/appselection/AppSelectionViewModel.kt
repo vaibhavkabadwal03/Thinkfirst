@@ -64,4 +64,15 @@ class AppSelectionViewModel @Inject constructor(
             )
         }
     }
+    fun onContinueClicked(){
+        _uiState.update {
+            it.copy(showAccessibilityDialog = true)
+        }
+    }
+
+    fun onAccessibilityDialogDismiss() {
+        _uiState.update {
+            it.copy(showAccessibilityDialog = false)
+        }
+    }
 }

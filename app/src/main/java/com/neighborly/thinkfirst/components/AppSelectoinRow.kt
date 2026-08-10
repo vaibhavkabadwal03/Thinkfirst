@@ -1,6 +1,7 @@
 package com.neighborly.thinkfirst.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
@@ -35,7 +36,7 @@ fun AppSelectionRow(
         modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.background)
-            .clip(RoundedCornerShape(40.dp))
+            .clip(RoundedCornerShape(40.dp)),
     ) {
         Card(
             modifier = Modifier
@@ -44,6 +45,15 @@ fun AppSelectionRow(
                 .clickable {
                     onSelectionChanged(!isSelected)
                 }
+                .border(
+                    width = .5.dp,
+                    color = if (isSelected) {
+                        MaterialTheme.colorScheme.primary.copy(alpha = 0.35f)
+                    } else {
+                        Color.Transparent
+                    },
+                    shape = RoundedCornerShape(12.dp)
+                )
                 .shadow(
                     elevation = if (isSelected) 8.dp else 0.dp,
                     shape = RoundedCornerShape(6.dp),
@@ -85,9 +95,8 @@ fun AppSelectionRow(
                         .weight(2f),
                     fontSize = 18.sp,
                 )
-                Checkbox(
+                AppCircularCheckbox(
                     checked = isSelected,
-                    onCheckedChange = null
                 )
             }
         }

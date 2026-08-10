@@ -1,5 +1,6 @@
 package com.neighborly.thinkfirst.feature.appselection
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neighborly.thinkfirst.domain.usecase.GetInstalledAppsUseCase
@@ -24,10 +25,18 @@ class AppSelectionViewModel @Inject constructor(
 
     private fun loadInstalledApps() {
         viewModelScope.launch {
+            Log.d("AppSelectionVM", "Setting loading = true")
 
             _uiState.update { it.copy(isLoading = true) }
 
+            Log.d("AppSelectionVM", "Calling getInstalledApps()")
+
             runCatching { getInstalledApps() }.onSuccess { apps ->
+                Log.d(
+                    "AppSelectionVM",
+                    "Apps loaded: ${apps.size}"
+                )
+
                 _uiState.update {
                     it.copy(
                         apps = apps,

@@ -46,7 +46,7 @@ fun AppSelectionRow(
                     onSelectionChanged(!isSelected)
                 }
                 .border(
-                    width = .5.dp,
+                    width = .4.dp,
                     color = if (isSelected) {
                         MaterialTheme.colorScheme.primary.copy(alpha = 0.35f)
                     } else {

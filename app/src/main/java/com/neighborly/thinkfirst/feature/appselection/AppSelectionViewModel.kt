@@ -3,6 +3,7 @@ package com.neighborly.thinkfirst.feature.appselection
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.neighborly.thinkfirst.domain.model.InstalledApp
 import com.neighborly.thinkfirst.domain.usecase.GetInstalledAppsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,8 +16,8 @@ import javax.inject.Inject
 class AppSelectionViewModel @Inject constructor(
     private val getInstalledApps: GetInstalledAppsUseCase
 ) : ViewModel() {
+    private var allApps: List<InstalledApp> = emptyList()
     private val _uiState = MutableStateFlow(AppSelectionUiState())
-
     val uiState = _uiState.asStateFlow()
 
     init {
@@ -25,21 +26,15 @@ class AppSelectionViewModel @Inject constructor(
 
     private fun loadInstalledApps() {
         viewModelScope.launch {
-            Log.d("AppSelectionVM", "Setting loading = true")
 
             _uiState.update { it.copy(isLoading = true) }
 
-            Log.d("AppSelectionVM", "Calling getInstalledApps()")
-
             runCatching { getInstalledApps() }.onSuccess { apps ->
-                Log.d(
-                    "AppSelectionVM",
-                    "Apps loaded: ${apps.size}"
-                )
+                allApps = apps
 
                 _uiState.update {
                     it.copy(
-                        apps = apps,
+                        apps = allApps,
                         isLoading = false
                     )
                 }
@@ -73,7 +68,8 @@ class AppSelectionViewModel @Inject constructor(
             )
         }
     }
-    fun onContinueClicked(){
+
+    fun onContinueClicked() {
         _uiState.update {
             it.copy(showAccessibilityDialog = true)
         }
@@ -82,6 +78,26 @@ class AppSelectionViewModel @Inject constructor(
     fun onAccessibilityDialogDismiss() {
         _uiState.update {
             it.copy(showAccessibilityDialog = false)
+        }
+    }
+
+    fun onSearchQueryChanged(query: String) {
+        val filteredApps = if (query.isBlank()) {
+            allApps
+        } else {
+            allApps.filter {
+                it.appName.contains(
+                    query,
+                    ignoreCase = true
+                )
+            }
+        }
+
+        _uiState.update {
+            it.copy(
+                searchQuery = query,
+                apps = filteredApps
+            )
         }
     }
 }

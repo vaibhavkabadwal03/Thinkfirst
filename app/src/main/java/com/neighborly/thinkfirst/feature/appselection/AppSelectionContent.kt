@@ -3,6 +3,7 @@ package com.neighborly.thinkfirst.feature.appselection
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -20,13 +21,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.neighborly.thinkfirst.R
+import com.neighborly.thinkfirst.components.AppSearchBar
 import com.neighborly.thinkfirst.components.AppSelectionRow
+import com.neighborly.thinkfirst.components.AppTopBar
 
 @Composable
 fun AppSelectionContent(
     state: AppSelectionUiState,
     onAppSelectionChanged: (String, Boolean) -> Unit,
     onContinueClick: () -> Unit,
+    onSearchQueryChanged: (String) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -50,6 +54,8 @@ fun AppSelectionContent(
                 }
             }
         } else {
+            AppTopBar { onBackPress() }
+            AppSearchBar(state, onSearchQueryChanged)
             LazyColumn(modifier = Modifier.weight(1f)) {
                 items(
                     state.apps,
@@ -62,7 +68,8 @@ fun AppSelectionContent(
                                 app.packageName,
                                 selected
                             )
-                        })
+                        }
+                    )
                 }
             }
 
@@ -79,4 +86,8 @@ fun AppSelectionContent(
             }
         }
     }
+}
+
+private fun ColumnScope.onBackPress() {
+    TODO("Not yet implemented")
 }

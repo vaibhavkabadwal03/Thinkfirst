@@ -15,7 +15,7 @@ fun AppAlertDialog(
     onAccessibilityConfirm: () -> Unit,
     onAccessibilityDialogDismiss: () -> Unit,
     title: String,
-    subtitle: String
+    subtitle: String,
 ) {
     AlertDialog(
         onDismissRequest = { },

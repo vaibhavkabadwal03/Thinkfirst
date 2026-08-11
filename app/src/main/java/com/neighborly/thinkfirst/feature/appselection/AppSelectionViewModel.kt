@@ -4,6 +4,8 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neighborly.thinkfirst.domain.model.InstalledApp
 import com.neighborly.thinkfirst.domain.usecase.GetInstalledAppsUseCase
+import com.neighborly.thinkfirst.domain.usecase.ObserveSelectedAppsUseCase
+import com.neighborly.thinkfirst.domain.usecase.SaveSelectedAppsUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -13,14 +15,37 @@ import javax.inject.Inject
 
 @HiltViewModel
 class AppSelectionViewModel @Inject constructor(
-    private val getInstalledApps: GetInstalledAppsUseCase
+    private val getInstalledApps: GetInstalledAppsUseCase,
+    private val saveSelectedApps: SaveSelectedAppsUseCase,
+    private val observeSelectedApps: ObserveSelectedAppsUseCase
 ) : ViewModel() {
     private var allApps: List<InstalledApp> = emptyList()
     private val _uiState = MutableStateFlow(AppSelectionUiState())
     val uiState = _uiState.asStateFlow()
 
     init {
+        observeSavedSelection()
         loadInstalledApps()
+    }
+
+    private fun observeSavedSelection() {
+        viewModelScope.launch {
+            observeSelectedApps().collect { selectedPackages ->
+
+                _uiState.update { state ->
+
+                    state.copy(
+                        selectedPackages = selectedPackages,
+                        apps = getFilteredApps(
+                            apps = allApps,
+                            selectedPackages = selectedPackages,
+                            filter = state.appFilter,
+                            searchQuery = state.searchQuery
+                        )
+                    )
+                }
+            }
+        }
     }
 
     private fun loadInstalledApps() {
@@ -76,8 +101,17 @@ class AppSelectionViewModel @Inject constructor(
     }
 
     fun onContinueClicked() {
-        _uiState.update {
-            it.copy(showAccessibilityDialog = true)
+        viewModelScope.launch {
+
+            saveSelectedApps(
+                _uiState.value.selectedPackages
+            )
+
+            _uiState.update {
+                it.copy(
+                    showAccessibilityDialog = true
+                )
+            }
         }
     }
 

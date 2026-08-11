@@ -21,6 +21,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import com.neighborly.thinkfirst.R
+import com.neighborly.thinkfirst.components.AppFilterSegmentedControl
 import com.neighborly.thinkfirst.components.AppSearchBar
 import com.neighborly.thinkfirst.components.AppSelectionRow
 import com.neighborly.thinkfirst.components.AppTopBar
@@ -31,6 +32,7 @@ fun AppSelectionContent(
     onAppSelectionChanged: (String, Boolean) -> Unit,
     onContinueClick: () -> Unit,
     onSearchQueryChanged: (String) -> Unit,
+    onAppFilterChanged: (AppFilter) -> Unit,
 ) {
     Column(
         modifier = Modifier
@@ -55,7 +57,16 @@ fun AppSelectionContent(
             }
         } else {
             AppTopBar { onBackPress() }
+            AppFilterSegmentedControl(
+                selectedFilter = state.appFilter,
+                onFilterSelected = onAppFilterChanged,
+                modifier = Modifier.padding(
+                    horizontal = 12.dp,
+                    vertical = 8.dp
+                )
+            )
             AppSearchBar(state, onSearchQueryChanged)
+
             LazyColumn(modifier = Modifier.weight(1f)) {
                 items(
                     state.apps,

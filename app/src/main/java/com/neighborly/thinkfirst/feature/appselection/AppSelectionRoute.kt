@@ -17,6 +17,7 @@ fun AppSelectionRoute(viewModel: AppSelectionViewModel = hiltViewModel()) {
     AppSelectionScreen(
         uiState = uiState,
         onAppSelectionChanged = viewModel::onAppSelectionChanged,
+        onAppFilterChanged = viewModel::onAppFilterChanged,
         onSearchQueryChanged = viewModel::onSearchQueryChanged,
         onContinueClick = viewModel::onContinueClicked,
         onAccessibilityDialogDismiss = viewModel::onAccessibilityDialogDismiss,

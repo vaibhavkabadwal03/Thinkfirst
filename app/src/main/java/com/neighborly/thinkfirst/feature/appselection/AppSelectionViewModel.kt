@@ -1,6 +1,5 @@
 package com.neighborly.thinkfirst.feature.appselection
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neighborly.thinkfirst.domain.model.InstalledApp
@@ -53,18 +52,25 @@ class AppSelectionViewModel @Inject constructor(
         packageName: String,
         selected: Boolean
     ) {
-        val updatedSelection =
-            _uiState.value.selectedPackages.toMutableSet()
+        _uiState.update { state ->
 
-        if (selected) {
-            updatedSelection.add(packageName)
-        } else {
-            updatedSelection.remove(packageName)
-        }
+            val updatedSelection =
+                state.selectedPackages.toMutableSet()
 
-        _uiState.update {
-            it.copy(
-                selectedPackages = updatedSelection
+            if (selected) {
+                updatedSelection.add(packageName)
+            } else {
+                updatedSelection.remove(packageName)
+            }
+
+            state.copy(
+                selectedPackages = updatedSelection,
+                apps = getFilteredApps(
+                    apps = allApps,
+                    selectedPackages = updatedSelection,
+                    filter = state.appFilter,
+                    searchQuery = state.searchQuery
+                )
             )
         }
     }
@@ -82,22 +88,60 @@ class AppSelectionViewModel @Inject constructor(
     }
 
     fun onSearchQueryChanged(query: String) {
-        val filteredApps = if (query.isBlank()) {
-            allApps
-        } else {
-            allApps.filter {
-                it.appName.contains(
-                    query,
-                    ignoreCase = true
+        _uiState.update { state ->
+            state.copy(
+                searchQuery = query,
+                apps = getFilteredApps(
+                    apps = allApps,
+                    selectedPackages = state.selectedPackages,
+                    filter = state.appFilter,
+                    searchQuery = query
                 )
+            )
+        }
+    }
+
+    fun onAppFilterChanged(filter: AppFilter) {
+        _uiState.update { state ->
+
+            state.copy(
+                appFilter = filter,
+                apps = getFilteredApps(
+                    apps = allApps,
+                    selectedPackages = state.selectedPackages,
+                    filter = filter,
+                    searchQuery = state.searchQuery
+                )
+            )
+        }
+    }
+
+    private fun getFilteredApps(
+        apps: List<InstalledApp>,
+        selectedPackages: Set<String>,
+        filter: AppFilter,
+        searchQuery: String
+    ): List<InstalledApp> {
+
+        val filterApps = when (filter) {
+            AppFilter.ALL -> apps
+
+            AppFilter.SELECTED -> {
+                apps.filter { app ->
+                    app.packageName in selectedPackages
+                }
             }
         }
 
-        _uiState.update {
-            it.copy(
-                searchQuery = query,
-                apps = filteredApps
-            )
+        return if (searchQuery.isBlank()) {
+            filterApps
+        } else {
+            filterApps.filter { app ->
+                app.appName.contains(
+                    searchQuery.trim(),
+                    ignoreCase = true
+                )
+            }
         }
     }
 }

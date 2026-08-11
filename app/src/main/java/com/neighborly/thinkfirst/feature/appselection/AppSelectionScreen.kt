@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.stringResource
 import com.kisaan.tubewell.core.designsystem.components.AppAlertDialog
 import com.neighborly.thinkfirst.R
+import com.neighborly.thinkfirst.feature.appselection.AppFilter
 import com.neighborly.thinkfirst.feature.appselection.AppSelectionContent
 import com.neighborly.thinkfirst.feature.appselection.AppSelectionUiState
 
@@ -15,12 +16,13 @@ fun AppSelectionScreen(
     onAccessibilityDialogDismiss: () -> Unit,
     onAccessibilityConfirm: () -> Unit,
     onSearchQueryChanged: (String) -> Unit,
+    onAppFilterChanged: (AppFilter) -> Unit,
 ) {
 
     val dialogTitle = stringResource(R.string.accessibility_permission)
     val dialogSubtitle = stringResource(R.string.accessibility_permission_subtitle)
 
-    AppSelectionContent(uiState, onAppSelectionChanged, onContinueClick,onSearchQueryChanged)
+    AppSelectionContent(uiState, onAppSelectionChanged, onContinueClick,onSearchQueryChanged, onAppFilterChanged)
 
     if (uiState.showAccessibilityDialog) {
         AppAlertDialog(

@@ -3,8 +3,9 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
     <application
-        android:name="com.neighborly.thinkfirst.ThinkFirst"
+        android:name=".ThinkFirst"
         android:allowBackup="true"
         android:dataExtractionRules="@xml/data_extraction_rules"
         android:fullBackupContent="@xml/backup_rules"
@@ -14,7 +15,11 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ThinkFirst">
         <activity
-            android:name="com.neighborly.thinkfirst.MainActivity"
+            android:name=".feature.intervention.InterventionActivity"
+            android:exported="false"
+            android:launchMode="singleTop"/>
+        <activity
+            android:name=".MainActivity"
             android:exported="true"
             android:label="@string/app_name"
             android:theme="@style/Theme.ThinkFirst">
@@ -26,11 +31,10 @@
         </activity>
 
         <service
-            android:name=".service.AccessibilityService"
+            android:name=".service.ThinkFirstAccessibilityService"
             android:exported="false"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_ACCESSIBILITY_SERVICE">
-
             <intent-filter>
                 <action android:name="android.accessibilityservice.AccessibilityService" />
             </intent-filter>
@@ -38,11 +42,7 @@
             <meta-data
                 android:name="android.accessibilityservice"
                 android:resource="@xml/accessibility_service_config" />
-
         </service>
-
     </application>
-
-
 
 </manifest>

@@ -9,4 +9,5 @@
     <string name="search_apps">Search App</string>
     <string name="all_apps">All Apps</string>
     <string name="selected_apps">Selected Apps</string>
+    <string name="accessibility_service_description">ThinkFirst monitors selected apps to help you pause before opening them.</string>
 </resources>

@@ -22,6 +22,7 @@ class ThinkFirstAccessibilityService : AccessibilityService() {
     lateinit var observeSelectedApps: ObserveSelectedAppsUseCase
     private var selectedPackages: Set<String> = emptySet()
     private var lastForegroundPackage: String? = null
+    private var ignoredPackage: String? = null
     private val serviceScope = CoroutineScope(
         SupervisorJob() + Dispatchers.Main.immediate
     )
@@ -44,8 +45,7 @@ class ThinkFirstAccessibilityService : AccessibilityService() {
             return
         }
 
-        val packageName = event.packageName?.toString()
-            ?: return
+        val packageName = event.packageName?.toString() ?: return
 
         if (packageName == lastForegroundPackage) {
             return
@@ -55,8 +55,17 @@ class ThinkFirstAccessibilityService : AccessibilityService() {
         Log.d(TAG, "Foreground app: $packageName")
 
         if (packageName in selectedPackages) {
+            if (packageName == InterventionBypass.packageName) {
+                Log.d(
+                    TAG,
+                    "Ignoring intervention for: $packageName"
+                )
+                InterventionBypass.packageName = null
+                return
+            }
+
             Log.d(TAG, "SELECTED APP DETECTED: $packageName")
-            openInterventionActivity()
+            openInterventionActivity(packageName)
         } else {
             Log.d(TAG, "APP NOT SELECTED: $packageName")
         }
@@ -64,17 +73,32 @@ class ThinkFirstAccessibilityService : AccessibilityService() {
         // We'll connect the selected-app check here.
     }
 
-    private fun openInterventionActivity() {
+    private fun openInterventionActivity(packageName: String) {
+        val appName = packageManager
+            .getApplicationInfo(packageName, 0)
+            .loadLabel(packageManager)
+            .toString()
+
         val intent = Intent(
             this,
             InterventionActivity::class.java
         ).apply {
             putExtra(
                 InterventionActivity.EXTRA_APP_NAME,
+                appName
+            )
+
+            putExtra(
+                InterventionActivity.EXTRA_PACKAGE_NAME,
                 packageName
             )
+
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
         }
+        Log.d(
+            TAG,
+            "Launching intervention: appName=$appName, packageName=$packageName"
+        )
         startActivity(intent)
     }
 

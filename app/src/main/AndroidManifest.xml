@@ -17,7 +17,9 @@
         <activity
             android:name=".feature.intervention.InterventionActivity"
             android:exported="false"
-            android:launchMode="singleTop"/>
+            android:launchMode="singleTop"
+            android:excludeFromRecents="true"
+            android:noHistory="true"/>
         <activity
             android:name=".MainActivity"
             android:exported="true"

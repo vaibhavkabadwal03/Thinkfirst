@@ -53,6 +53,10 @@ fun AppSelectionContent(
                     CircularProgressIndicator(
                         color = MaterialTheme.colorScheme.primary
                     )
+                    Text(
+                        text = stringResource(R.string.loading_your_apps),
+                        color = MaterialTheme.colorScheme.primary
+                    )
                 }
             }
         } else {

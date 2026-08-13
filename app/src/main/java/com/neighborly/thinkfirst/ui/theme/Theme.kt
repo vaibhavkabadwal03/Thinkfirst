@@ -53,7 +53,7 @@ fun ThinkFirstTheme(
     }
 
     MaterialTheme(
-        colorScheme = ThinkFirstDarkColorScheme,
+        colorScheme = colorScheme,
         typography = Typography,
         content = content
     )

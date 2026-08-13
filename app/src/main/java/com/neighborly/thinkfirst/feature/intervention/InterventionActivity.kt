@@ -11,6 +11,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.neighborly.thinkfirst.service.InterventionBypass
+import com.neighborly.thinkfirst.ui.theme.ThinkFirstTheme
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -40,13 +41,15 @@ class InterventionActivity : ComponentActivity() {
         }
 
         setContent {
-            val state by viewModel.uiState.collectAsStateWithLifecycle()
+            ThinkFirstTheme {
+                val state by viewModel.uiState.collectAsStateWithLifecycle()
 
-            InterventionScreen(
-                state = state,
-                onOpenClick = viewModel::onOpenClick,
-                onCloseClick = viewModel::onCloseClick
-            )
+                InterventionScreen(
+                    state = state,
+                    onOpenClick = viewModel::onOpenClick,
+                    onCloseClick = viewModel::onCloseClick
+                )
+            }
         }
     }
 

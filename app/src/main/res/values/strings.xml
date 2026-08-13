@@ -10,6 +10,11 @@
     <string name="all_apps">All Apps</string>
     <string name="selected_apps">Selected Apps</string>
     <string name="accessibility_service_description">ThinkFirst monitors selected apps to help you pause before opening them.</string>
-    <string name="app_core_phrase">Pause. Think. Then decide.</string>
+    <string name="app_core_phrase">Pause. Think. Decide.</string>
     <string name="loading_your_apps">Loading your apps.</string>
+    <string name="close">Close</string>
+    <string name="open">Open</string>
+    <string name="intervention_confirmation_title">Do you really want to open %1$s?</string>
+    <string name="intervention_message">Think before you do!</string>
+    <string name="take_a_moment">Take a moment.</string>
 </resources>

@@ -8,7 +8,6 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 @Composable
 fun DashboardRoute(
     onNavigateToAppSelection: () -> Unit,
-    onPermissionsClick: () -> Unit,
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
 

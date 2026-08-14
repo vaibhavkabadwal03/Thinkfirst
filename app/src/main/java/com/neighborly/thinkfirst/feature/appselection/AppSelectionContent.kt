@@ -30,7 +30,7 @@ import com.neighborly.thinkfirst.components.AppTopBar
 fun AppSelectionContent(
     state: AppSelectionUiState,
     onAppSelectionChanged: (String, Boolean) -> Unit,
-    onContinueClick: () -> Unit,
+//    onContinueClick: () -> Unit,
     onSearchQueryChanged: (String) -> Unit,
     onAppFilterChanged: (AppFilter) -> Unit,
 ) {
@@ -88,7 +88,7 @@ fun AppSelectionContent(
                 }
             }
 
-            Button(
+            /*Button(
                 onClick = onContinueClick,
                 enabled = state.selectedPackages.isNotEmpty(),
                 modifier = Modifier
@@ -98,7 +98,7 @@ fun AppSelectionContent(
                 shape = RoundedCornerShape(12.dp)
             ) {
                 Text(stringResource(R.string.continue_button))
-            }
+            }*/
         }
     }
 }

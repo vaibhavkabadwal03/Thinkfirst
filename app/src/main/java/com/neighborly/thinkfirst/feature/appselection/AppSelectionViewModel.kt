@@ -100,7 +100,7 @@ class AppSelectionViewModel @Inject constructor(
         }
     }
 
-    fun onContinueClicked() {
+    /*fun onContinueClicked() {
         viewModelScope.launch {
 
             saveSelectedApps(
@@ -114,12 +114,12 @@ class AppSelectionViewModel @Inject constructor(
             }
         }
     }
-
-    fun onAccessibilityDialogDismiss() {
+*/
+    /*fun onAccessibilityDialogDismiss() {
         _uiState.update {
             it.copy(showAccessibilityDialog = false)
         }
-    }
+    }*/
 
     fun onSearchQueryChanged(query: String) {
         _uiState.update { state ->

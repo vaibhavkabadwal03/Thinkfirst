@@ -8,7 +8,7 @@ data class AppSelectionUiState(
     val searchQuery: String = "",
     val isLoading: Boolean = false,
     val error: String? = null,
-    val showAccessibilityDialog: Boolean = false,
+//    val showAccessibilityDialog: Boolean = false,
     val appFilter: AppFilter = AppFilter.ALL,
 )
 

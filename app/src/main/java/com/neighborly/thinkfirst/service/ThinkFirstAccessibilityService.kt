@@ -4,6 +4,7 @@ import android.accessibilityservice.AccessibilityService
 import android.content.Intent
 import android.util.Log
 import android.view.accessibility.AccessibilityEvent
+import com.neighborly.thinkfirst.MainActivity
 import com.neighborly.thinkfirst.domain.usecase.ObserveSelectedAppsUseCase
 import com.neighborly.thinkfirst.feature.intervention.InterventionActivity
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,6 +38,19 @@ class ThinkFirstAccessibilityService : AccessibilityService() {
                 Log.d(TAG, "Selected packages: $packages")
             }
         }
+        openThinkFirst()
+    }
+
+    private fun openThinkFirst() {
+        val intent = Intent(this, MainActivity::class.java).apply {
+            addFlags(
+                Intent.FLAG_ACTIVITY_NEW_TASK or
+                        Intent.FLAG_ACTIVITY_CLEAR_TOP or
+                        Intent.FLAG_ACTIVITY_SINGLE_TOP
+            )
+        }
+
+        startActivity(intent)
     }
 
     override fun onAccessibilityEvent(event: AccessibilityEvent?) {

@@ -1,7 +1,5 @@
 package com.neighborly.thinkfirst.feature.appselection
 
-import android.content.Intent
-import android.provider.Settings
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.platform.LocalContext
@@ -19,13 +17,13 @@ fun AppSelectionRoute(viewModel: AppSelectionViewModel = hiltViewModel()) {
         onAppSelectionChanged = viewModel::onAppSelectionChanged,
         onAppFilterChanged = viewModel::onAppFilterChanged,
         onSearchQueryChanged = viewModel::onSearchQueryChanged,
-        onContinueClick = viewModel::onContinueClicked,
-        onAccessibilityDialogDismiss = viewModel::onAccessibilityDialogDismiss,
-        onAccessibilityConfirm = {
+//        onContinueClick = viewModel::onContinueClicked,
+//        onAccessibilityDialogDismiss = viewModel::onAccessibilityDialogDismiss,
+        /*onAccessibilityConfirm = {
             context.startActivity(
                 Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)
             )
-        }
+        }*/
 
     )
 }

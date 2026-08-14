@@ -12,24 +12,21 @@ import com.neighborly.thinkfirst.feature.appselection.AppSelectionUiState
 fun AppSelectionScreen(
     uiState: AppSelectionUiState,
     onAppSelectionChanged: (String, Boolean) -> Unit,
-    onContinueClick: () -> Unit,
-    onAccessibilityDialogDismiss: () -> Unit,
-    onAccessibilityConfirm: () -> Unit,
     onSearchQueryChanged: (String) -> Unit,
     onAppFilterChanged: (AppFilter) -> Unit,
 ) {
 
-    val dialogTitle = stringResource(R.string.accessibility_permission)
-    val dialogSubtitle = stringResource(R.string.accessibility_permission_subtitle)
+    /*val dialogTitle = stringResource(R.string.accessibility_permission)
+    val dialogSubtitle = stringResource(R.string.accessibility_permission_subtitle)*/
 
-    AppSelectionContent(uiState, onAppSelectionChanged, onContinueClick,onSearchQueryChanged, onAppFilterChanged)
+    AppSelectionContent(uiState, onAppSelectionChanged,onSearchQueryChanged, onAppFilterChanged)
 
-    if (uiState.showAccessibilityDialog) {
+    /*if (uiState.showAccessibilityDialog) {
         AppAlertDialog(
             onAccessibilityConfirm = onAccessibilityConfirm,
             onAccessibilityDialogDismiss = onAccessibilityDialogDismiss,
             title = dialogTitle,
             subtitle = dialogSubtitle,
         )
-    }
+    }*/
 }

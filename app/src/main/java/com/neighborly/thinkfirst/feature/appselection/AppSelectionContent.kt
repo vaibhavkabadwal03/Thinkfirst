@@ -6,12 +6,9 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
@@ -30,7 +27,6 @@ import com.neighborly.thinkfirst.components.AppTopBar
 fun AppSelectionContent(
     state: AppSelectionUiState,
     onAppSelectionChanged: (String, Boolean) -> Unit,
-//    onContinueClick: () -> Unit,
     onSearchQueryChanged: (String) -> Unit,
     onAppFilterChanged: (AppFilter) -> Unit,
 ) {
@@ -87,18 +83,6 @@ fun AppSelectionContent(
                     )
                 }
             }
-
-            /*Button(
-                onClick = onContinueClick,
-                enabled = state.selectedPackages.isNotEmpty(),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(start = 8.dp, end = 8.dp, top = 16.dp, bottom = 8.dp)
-                    .height(56.dp),
-                shape = RoundedCornerShape(12.dp)
-            ) {
-                Text(stringResource(R.string.continue_button))
-            }*/
         }
     }
 }

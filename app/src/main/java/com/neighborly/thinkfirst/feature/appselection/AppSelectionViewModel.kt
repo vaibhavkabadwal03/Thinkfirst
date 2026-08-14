@@ -3,9 +3,10 @@ package com.neighborly.thinkfirst.feature.appselection
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.neighborly.thinkfirst.domain.model.InstalledApp
+import com.neighborly.thinkfirst.domain.usecase.AddSelectedAppUseCase
 import com.neighborly.thinkfirst.domain.usecase.GetInstalledAppsUseCase
 import com.neighborly.thinkfirst.domain.usecase.ObserveSelectedAppsUseCase
-import com.neighborly.thinkfirst.domain.usecase.SaveSelectedAppsUseCase
+import com.neighborly.thinkfirst.domain.usecase.RemoveSelectedAppUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -16,9 +17,11 @@ import javax.inject.Inject
 @HiltViewModel
 class AppSelectionViewModel @Inject constructor(
     private val getInstalledApps: GetInstalledAppsUseCase,
-    private val saveSelectedApps: SaveSelectedAppsUseCase,
-    private val observeSelectedApps: ObserveSelectedAppsUseCase
-) : ViewModel() {
+    private val observeSelectedApps: ObserveSelectedAppsUseCase,
+    private val addSelectedApp: AddSelectedAppUseCase,
+    private val removeSelectedApp: RemoveSelectedAppUseCase,
+
+    ) : ViewModel() {
     private var allApps: List<InstalledApp> = emptyList()
     private val _uiState = MutableStateFlow(AppSelectionUiState())
     val uiState = _uiState.asStateFlow()
@@ -77,49 +80,14 @@ class AppSelectionViewModel @Inject constructor(
         packageName: String,
         selected: Boolean
     ) {
-        _uiState.update { state ->
-
-            val updatedSelection =
-                state.selectedPackages.toMutableSet()
-
-            if (selected) {
-                updatedSelection.add(packageName)
-            } else {
-                updatedSelection.remove(packageName)
-            }
-
-            state.copy(
-                selectedPackages = updatedSelection,
-                apps = getFilteredApps(
-                    apps = allApps,
-                    selectedPackages = updatedSelection,
-                    filter = state.appFilter,
-                    searchQuery = state.searchQuery
-                )
-            )
-        }
-    }
-
-    /*fun onContinueClicked() {
         viewModelScope.launch {
-
-            saveSelectedApps(
-                _uiState.value.selectedPackages
-            )
-
-            _uiState.update {
-                it.copy(
-                    showAccessibilityDialog = true
-                )
+            if (selected) {
+                addSelectedApp(packageName)
+            } else {
+                removeSelectedApp(packageName)
             }
         }
     }
-*/
-    /*fun onAccessibilityDialogDismiss() {
-        _uiState.update {
-            it.copy(showAccessibilityDialog = false)
-        }
-    }*/
 
     fun onSearchQueryChanged(query: String) {
         _uiState.update { state ->

@@ -15,18 +15,5 @@ fun AppSelectionScreen(
     onSearchQueryChanged: (String) -> Unit,
     onAppFilterChanged: (AppFilter) -> Unit,
 ) {
-
-    /*val dialogTitle = stringResource(R.string.accessibility_permission)
-    val dialogSubtitle = stringResource(R.string.accessibility_permission_subtitle)*/
-
     AppSelectionContent(uiState, onAppSelectionChanged,onSearchQueryChanged, onAppFilterChanged)
-
-    /*if (uiState.showAccessibilityDialog) {
-        AppAlertDialog(
-            onAccessibilityConfirm = onAccessibilityConfirm,
-            onAccessibilityDialogDismiss = onAccessibilityDialogDismiss,
-            title = dialogTitle,
-            subtitle = dialogSubtitle,
-        )
-    }*/
 }

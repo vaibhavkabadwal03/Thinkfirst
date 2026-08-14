@@ -22,8 +22,12 @@ class AppRepositoryImpl @Inject constructor(private val dataSource: PackageManag
                 }
         }
 
-    override suspend fun saveSelectedApps(packageNames: Set<String>) {
-        selectedAppsDataSource.saveSelectedApps(packageNames)
+    override suspend fun addSelectedApp(packageName: String) {
+        selectedAppsDataSource.addSelectedApp(packageName)
+    }
+
+    override suspend fun removeSelectedApp(packageName: String) {
+        selectedAppsDataSource.removeSelectedApp(packageName)
     }
 
     override fun observeSelectedApps(): Flow<Set<String>> {

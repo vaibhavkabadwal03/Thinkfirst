@@ -5,11 +5,9 @@ import kotlinx.coroutines.flow.Flow
 
 interface AppRepository {
     suspend fun getInstalledApps(): List<InstalledApp>
+    suspend fun addSelectedApp(packageName: String)
 
-    suspend fun saveSelectedApps(
-        packageNames: Set<String>
-    )
-
+    suspend fun removeSelectedApp(packageName: String)
     fun observeSelectedApps(): Flow<Set<String>>
 
 }

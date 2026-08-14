@@ -13,11 +13,25 @@ class SelectedAppsDataSourceImpl @Inject constructor(
     @ApplicationContext private val context: Context
 ) : SelectedAppsDataSource {
 
-    override suspend fun saveSelectedApps(
-        packageNames: Set<String>
-    ) {
+    override suspend fun addSelectedApp(packageName: String) {
         context.appDataStore.edit { preferences ->
-            preferences[AppPreferencesKeys.SELECTED_APPS] = packageNames
+            val currentApps =
+                preferences[AppPreferencesKeys.SELECTED_APPS]
+                    ?: emptySet()
+
+            preferences[AppPreferencesKeys.SELECTED_APPS] =
+                currentApps + packageName
+        }
+    }
+
+    override suspend fun removeSelectedApp(packageName: String) {
+        context.appDataStore.edit { preferences ->
+            val currentApps =
+                preferences[AppPreferencesKeys.SELECTED_APPS]
+                    ?: emptySet()
+
+            preferences[AppPreferencesKeys.SELECTED_APPS] =
+                currentApps - packageName
         }
     }
 

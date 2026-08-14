@@ -17,4 +17,14 @@
     <string name="intervention_confirmation_title">Do you really want to open %1$s?</string>
     <string name="intervention_message">Think before you do!</string>
     <string name="take_a_moment">Take a moment.</string>
+    <string name="why_accessibility">Why is this needed?</string>
+    <string name="step_card_title1">Detect selected apps</string>
+    <string name="step_card_subtitle1">We observe when the apps you choose are opened.</string>
+    <string name="step_card_title2">Gives you a moment to pause</string>
+    <string name="step_card_subtitle2">We help you take a moment before the app opens.</string>
+    <string name="step_card_title3">Start your ThinkFirst intervention</string>
+    <string name="step_card_subtitle3">We show a quick intervention to help you make a mindful choice.</string>
+    <string name="enable_accessibility">Enable Accessibility</string>
+    <string name="privacy_statement1">Your data stays on your device.</string>
+    <string name="privacy_statement2">We value your privacy.</string>
 </resources>

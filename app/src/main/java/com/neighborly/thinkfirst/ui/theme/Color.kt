@@ -17,7 +17,7 @@ val ThinkFirstGreenSoft = Color(0xFF9AFF87)
 
 // Backgrounds
 val ThinkFirstBlack = Color(0xFF000000)
-val ThinkFirstBackground = Color(0xFF080A08)
+val ThinkFirstBackground = Color.Black
 val ThinkFirstSurface = Color(0xFF111411)
 val ThinkFirstSurfaceVariant = Color(0xFF191D19)
 
